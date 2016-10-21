@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,7 +18,7 @@ public class ImgLoader {
 	private ImgLoader() {
 	}
 
-	private static final Image FAILED_IMAGE = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+	static final Image FAILED_IMAGE = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 
 	static {
 		Graphics g = FAILED_IMAGE.getGraphics();
@@ -46,6 +47,32 @@ public class ImgLoader {
 		} catch (IOException e) {
 			System.err.println("Failed to load image with resKey " + resKey);
 			return FAILED_IMAGE;
+		}
+	}
+
+	/**
+	 * Loads a gif
+	 * 
+	 * @param resKey
+	 */
+	public static Gif loadGif(String resKey) {
+		try {
+			InputStream input = ImgLoader.class.getResourceAsStream("/gifs/" + resKey + ".gif");
+			if (input == null) {
+				throw new IOException("input == null");
+			}
+			byte[] buffer = new byte[8192];
+			int amtRead;
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			while ((amtRead = input.read(buffer)) != -1) {
+				baos.write(buffer, 0, amtRead);
+			}
+
+			return new Gif(baos.toByteArray());
+		} catch (IOException e) {
+			System.err.println("Failed to load gif with resKey " + resKey);
+			return Gif.FAILED_GIF;
 		}
 	}
 }
