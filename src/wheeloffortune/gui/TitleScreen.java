@@ -9,17 +9,17 @@ public class TitleScreen extends Screen {
 
 	public TitleScreen() {
 		// Here's a good place to set the background color (default is black)
-		setBackgroundColor(new Color(64, 0, 0));
+		setBackgroundColor(new Color(178, 238, 255));
 	}
 
 	@Override
 	public void layout() {
 		// Add components to layout the screen
 		// Args are generally x, y, width, height, extra...
-		addLabel(width / 2, height / 2, 2, 2, "Text in the middle of the screen", Color.GREEN);
-		addButton(width - 150, 0, 150, 100, "Top-right", "topRightButton");
-		addButton(0, height - 100, 150, 100, "Bottom-left", "bottomLeftButton");
-		addImage(0, 0, 100, 100, Images.test);
+		
+		addButton(width / 3, height / 2 + 50, width / 3, 50, "Play", "topRightButton");
+		addButton(width / 3, height / 2 + 150, width / 3, 50, "Exit", "bottomLeftButton");
+		addImage(width / 3 , height / 50, width / 3, height / 2, Images.test);
 	}
 
 	@Override
@@ -28,17 +28,16 @@ public class TitleScreen extends Screen {
 		super.draw(g);
 
 		// Draw custom things here
-		g.setColor(Color.RED);
-		g.fillRect(width - 40, height - 40, 40, 40);
+		
 	}
 
 	@Override
 	public void onButtonPressed(String buttonId) {
 		// This is where you handle your button presses
 		if ("topRightButton".equals(buttonId)) {
-			System.out.println("Top-right button pressed");
+			System.out.println("Play button pressed");
 		} else if ("bottomLeftButton".equals(buttonId)) {
-			System.out.println("Bottom-left button pressed");
+			System.out.println("Exit button pressed");
 		}
 	}
 

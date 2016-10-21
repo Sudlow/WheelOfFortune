@@ -6,6 +6,6 @@ import java.awt.Image;
 
 public class Images {
 
-	public static final Image test = loadImage("test");
+	public static final Image test = loadImage("usethislogo");
 
 }

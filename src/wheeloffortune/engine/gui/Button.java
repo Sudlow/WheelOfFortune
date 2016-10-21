@@ -13,7 +13,7 @@ public class Button extends Component {
 	private static final Color NORMAL_BG_COLOR = Color.WHITE;
 	private static final Color NORMAL_OUTLINE_COLOR = Color.BLACK;
 	private static final Color NORMAL_TEXT_COLOR = Color.BLACK;
-	private static final Color HOVERED_BG_COLOR = new Color(224, 224, 255);
+	private static final Color HOVERED_BG_COLOR = new Color(255, 255, 153);
 	private static final Color HOVERED_OUTLINE_COLOR = new Color(0, 0, 32);
 	private static final Color HOVERED_TEXT_COLOR = new Color(0, 0, 32);
 	private static final Color PRESSED_BG_COLOR = new Color(255, 224, 224);
