@@ -60,8 +60,8 @@ public abstract class Screen {
 	/**
 	 * Helper method to add a label to this screen. Returns the label created
 	 */
-	public Label addLabel(int x, int y, int width, int height, String text) {
-		Label label = new Label(x, y, width, height, text);
+	public Label addLabel(int x, int y, String text) {
+		Label label = new Label(x, y, text);
 		addComponent(label);
 		return label;
 	}
@@ -69,8 +69,8 @@ public abstract class Screen {
 	/**
 	 * Helper method to add a label to this screen. Returns the label created
 	 */
-	public Label addLabel(int x, int y, int width, int height, String text, Color color) {
-		Label label = new Label(x, y, width, height, text, color);
+	public Label addLabel(int x, int y, String text, Color color) {
+		Label label = new Label(x, y, text, color);
 		addComponent(label);
 		return label;
 	}

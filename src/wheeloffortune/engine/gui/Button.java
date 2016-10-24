@@ -78,7 +78,8 @@ public class Button extends Component {
 
 		g.setColor(textColor);
 		g.setFont(Game.NORMAL_FONT);
-		drawCenteredString(g, text, getX() + getWidth() / 2, getY() + getHeight() / 2);
+		drawAlignedString(g, text, getX() + getWidth() / 2, getY() + getHeight() / 2, TEXT_ALIGN_CENTER,
+				TEXT_ALIGN_MIDDLE);
 	}
 
 }
