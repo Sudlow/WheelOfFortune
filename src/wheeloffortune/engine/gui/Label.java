@@ -87,7 +87,7 @@ public class Label extends Component {
 	public void draw(Graphics g) {
 		g.setColor(color);
 		g.setFont(FONT);
-		drawAlignedString(g, text, getX() + getWidth() / 2, getY() + getHeight() / 2, hAlignment, vAlignment);
+		drawAlignedString(g, text, getX(), getY(), hAlignment, vAlignment);
 	}
 
 }
