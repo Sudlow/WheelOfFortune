@@ -3,7 +3,9 @@ package wheeloffortune.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import wheeloffortune.engine.gui.GifDisplay;
 import wheeloffortune.engine.gui.Screen;
+import wheeloffortune.game.Game;
 
 public class TitleScreen extends Screen {
 
@@ -19,7 +21,8 @@ public class TitleScreen extends Screen {
 		
 		addButton(width / 3, height / 2 + 50, width / 3, 50, "Play", "topRightButton");
 		addButton(width / 3, height / 2 + 150, width / 3, 50, "Exit", "bottomLeftButton");
-		addImage(width / 3 , height / 50, width / 3, height / 2, Images.test);
+		addImage(width / 3 , height / 50, width / 3, height / 2, Images.logo);
+		
 	}
 
 	@Override
@@ -35,9 +38,9 @@ public class TitleScreen extends Screen {
 	public void onButtonPressed(String buttonId) {
 		// This is where you handle your button presses
 		if ("topRightButton".equals(buttonId)) {
-			System.out.println("Play button pressed");
+		    Game.openScreen(new PlayerSelect());;
 		} else if ("bottomLeftButton".equals(buttonId)) {
-			System.out.println("Exit button pressed");
+			Game.stopGame();
 		}
 	}
 
