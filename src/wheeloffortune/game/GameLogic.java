@@ -92,6 +92,8 @@ public class GameLogic {
 		currentPlayerTurn = 0;
 		currentSpinnerSpeed = 0;
 		currentSpinnerAngle = 0;
+		
+		System.out.println("Started new game with " + numberOfPlayers + " players");
 	}
 	
 	public Player getCurrentPlayer() {
