@@ -26,6 +26,7 @@ public class Game
     private static CustomJFrame theFrame;
     private static MainWindow   theWindow;
     private static Screen       openScreen;
+    private static GameLogic	logic;
     
     // MAIN METHOD
     public static void main(String[] args)
@@ -37,6 +38,8 @@ public class Game
     // LIFECYCLE METHODS
     private static void initializeGame()
     {
+    	logic = new GameLogic();
+    	
         theWindow = new MainWindow();
         theFrame = new CustomJFrame(theWindow);
         
@@ -159,6 +162,11 @@ public class Game
     public static MainWindow getWindow()
     {
         return theWindow;
+    }
+    
+    public static GameLogic getLogic()
+    {
+    	return logic;
     }
     
 }
