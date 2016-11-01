@@ -1,5 +1,6 @@
 package wheeloffortune.engine.gui;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
@@ -10,6 +11,13 @@ public abstract class Component {
 	private int width;
 	private int height;
 	private Screen owningScreen;
+
+	public static final float TEXT_ALIGN_LEFT = 0;
+	public static final float TEXT_ALIGN_CENTER = 0.5f;
+	public static final float TEXT_ALIGN_RIGHT = 1;
+	public static final float TEXT_ALIGN_TOP = 0;
+	public static final float TEXT_ALIGN_MIDDLE = 0.5f;
+	public static final float TEXT_ALIGN_BOTTOM = 1;
 
 	public Component(int x, int y, int width, int height) {
 		this.x = x;
@@ -69,9 +77,11 @@ public abstract class Component {
 
 	public abstract void draw(Graphics g);
 
-	protected static void drawCenteredString(Graphics g, String text, int x, int y) {
-		Rectangle2D textSize = g.getFontMetrics().getStringBounds(text, g);
-		g.drawString(text, x - (int) (textSize.getWidth() / 2), y + (int) (textSize.getHeight() / 4));
+	protected static void drawAlignedString(Graphics g, String text, int x, int y, float hAlignment, float vAlignment) {
+		FontMetrics fontMetrics = g.getFontMetrics();
+		int lineHeight = fontMetrics.getAscent() + fontMetrics.getDescent();
+		g.drawString(text, (int) (x - (fontMetrics.stringWidth(text) * hAlignment)),
+				(int) (y + fontMetrics.getAscent() - (lineHeight * vAlignment)));
 	}
 
 }
