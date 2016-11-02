@@ -107,14 +107,6 @@ public class GameLogic {
 		}
 	}
 
-	public int getCurrentSpinnerSpeed() {
-		return currentSpinnerSpeed;
-	}
-
-	public void setCurrentSpinnerSpeed(int currentSpinnerSpeed) {
-		this.currentSpinnerSpeed = currentSpinnerSpeed;
-	}
-
 	public float getCurrentSpinnerAngle() {
 		return currentSpinnerAngle;
 	}
