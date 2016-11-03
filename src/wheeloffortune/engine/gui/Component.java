@@ -2,7 +2,6 @@ package wheeloffortune.engine.gui;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 
 public abstract class Component {
 

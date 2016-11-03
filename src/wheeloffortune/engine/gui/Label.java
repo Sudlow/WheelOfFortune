@@ -10,12 +10,12 @@ import wheeloffortune.game.Game;
 public class Label extends Component {
 
 	private static final Color DEFAULT_COLOR = Color.BLACK;
-	private static final Font FONT = Game.NORMAL_FONT;
 
 	private String text;
 	private Color color;
 	private float hAlignment = TEXT_ALIGN_LEFT;
 	private float vAlignment = TEXT_ALIGN_TOP;
+	private Font font = Game.NORMAL_FONT;
 
 	public Label(int x, int y, String text) {
 		this(x, y, text, DEFAULT_COLOR);
@@ -30,7 +30,7 @@ public class Label extends Component {
 	@Override
 	public int getWidth() {
 		Graphics g = Game.getWindow().getGraphics();
-		FontMetrics fontMetrics = g.getFontMetrics(FONT);
+		FontMetrics fontMetrics = g.getFontMetrics(font);
 		return fontMetrics.stringWidth(text);
 	}
 
@@ -42,7 +42,7 @@ public class Label extends Component {
 	@Override
 	public int getHeight() {
 		Graphics g = Game.getWindow().getGraphics();
-		FontMetrics fontMetrics = g.getFontMetrics(FONT);
+		FontMetrics fontMetrics = g.getFontMetrics(font);
 		return fontMetrics.getAscent() + fontMetrics.getDescent();
 	}
 
@@ -83,10 +83,18 @@ public class Label extends Component {
 		this.vAlignment = vAlignment;
 	}
 
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.setFont(FONT);
+		g.setFont(font);
 		drawAlignedString(g, text, getX(), getY(), hAlignment, vAlignment);
 	}
 

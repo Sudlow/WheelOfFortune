@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 public class ImageDisplay extends Component {
 
 	private Image image;
-	private int rotation = 0;
+	private float rotation = 0;
 	private boolean constantScale = false;
 
 	public ImageDisplay(int x, int y, int width, int height, Image image) {
@@ -25,11 +25,11 @@ public class ImageDisplay extends Component {
 		this.image = image;
 	}
 
-	public int getRotation() {
+	public float getRotation() {
 		return rotation;
 	}
 
-	public void setRotation(int rotation) {
+	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
 
