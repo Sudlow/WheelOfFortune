@@ -2,10 +2,9 @@ package wheeloffortune.game;
 
 public interface SpinnerAction {
 
-	/**
-	 * Returns whether the player should continue their turn
-	 */
-	boolean performAction();
+	void performAction();
+	
+	boolean endsTurn();
 
 	public static class Money implements SpinnerAction {
 		private int amt;
@@ -15,9 +14,18 @@ public interface SpinnerAction {
 		}
 
 		@Override
-		public boolean performAction() {
+		public void performAction() {
 			Game.getLogic().setMoneyOnSpinner(amt);
-			return true;
+		}
+		
+		@Override
+		public boolean endsTurn() {
+			return false;
+		}
+		
+		@Override
+		public String toString() {
+			return "$" + amt;
 		}
 
 	}
@@ -25,9 +33,18 @@ public interface SpinnerAction {
 	public static class Bankrupt implements SpinnerAction {
 
 		@Override
-		public boolean performAction() {
+		public void performAction() {
 			Game.getLogic().getCurrentPlayer().setMoney(0);
-			return false;
+		}
+		
+		@Override
+		public boolean endsTurn() {
+			return true;
+		}
+		
+		@Override
+		public String toString() {
+			return "BACKRUPT!!!";
 		}
 		
 	}
@@ -35,9 +52,18 @@ public interface SpinnerAction {
 	public static class MissTurn implements SpinnerAction {
 
 		@Override
-		public boolean performAction() {
+		public void performAction() {
 			Game.getLogic().nextPlayer();
-			return false;
+		}
+		
+		@Override
+		public boolean endsTurn() {
+			return true;
+		}
+		
+		@Override
+		public String toString() {
+			return "Miss a turn";
 		}
 		
 	}

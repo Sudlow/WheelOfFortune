@@ -11,8 +11,12 @@ public class Images {
 	public static final Image logo = loadImage("usethislogo");
 	
 	public static final Image wheel = loadImage("wheel");
+	
+	public static final Image wheelPointer = loadImage("wheel_pointer");
 
 	public static final Gif Carlton = loadGif("Carlton");
+	
+	public static final Gif wheelArrow = loadGif("wheel_arrow");
 	
 	
 }
