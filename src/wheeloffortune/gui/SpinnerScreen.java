@@ -332,7 +332,7 @@ public class SpinnerScreen extends Screen {
 		},
 		SHOW_NOT_PROPER_SPIN {
 
-			private final Font FONT = Game.NORMAL_FONT.deriveFont(Font.BOLD, 72);
+			private final Font FONT = Game.NORMAL_FONT.deriveFont(Font.BOLD, 33);
 
 			private int cooldown;
 			private Label spinProperlyLabel;
@@ -347,7 +347,7 @@ public class SpinnerScreen extends Screen {
 
 			@Override
 			public void layout(SpinnerScreen screen) {
-				spinProperlyLabel = screen.addLabel(screen.width / 2, screen.height / 2, "Spin properly!", Color.RED);
+				spinProperlyLabel = screen.addLabel(screen.width / 2, screen.height / 2, "Spin properly you stupid idiot!", Color.RED);
 				spinProperlyLabel.setHAlignment(Label.TEXT_ALIGN_CENTER);
 				spinProperlyLabel.setVAlignment(Label.TEXT_ALIGN_MIDDLE);
 				spinProperlyLabel.setFont(FONT);
