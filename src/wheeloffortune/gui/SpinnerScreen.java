@@ -299,7 +299,7 @@ public class SpinnerScreen extends Screen {
 		},
 		FINISHED_SPIN {
 
-			private final Font FONT = Game.NORMAL_FONT.deriveFont(Font.BOLD, 50);
+			private final Font FONT = new Font(Game.FONT_NAME, Font.BOLD, 50);
 
 			private SpinnerAction spinnerAction;
 			private Label spinnerActionLabel;
@@ -336,7 +336,7 @@ public class SpinnerScreen extends Screen {
 		},
 		SHOW_NOT_PROPER_SPIN {
 
-			private final Font FONT = Game.NORMAL_FONT.deriveFont(Font.BOLD, 33);
+			private final Font FONT = new Font(Game.FONT_NAME, Font.BOLD, 33);
 
 			private int cooldown;
 			private Label spinProperlyLabel;
