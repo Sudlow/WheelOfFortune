@@ -235,6 +235,10 @@ public class SpinnerScreen extends Screen {
 
 						spinDirection = spinDir;
 					}
+					if (spinDirection == 0) {
+						// The wheel isn't moving yet, this doesn't count to the speed of the spin
+						gestureStartTime = screen.time;
+					}
 				}
 
 				lastGestureAngle = currentGestureAngle;
