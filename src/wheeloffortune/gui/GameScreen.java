@@ -1,12 +1,16 @@
 package wheeloffortune.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import wheeloffortune.engine.gui.Label;
 import wheeloffortune.engine.gui.Screen;
+import wheeloffortune.engine.input.Keyboard;
 import wheeloffortune.game.Game;
 
 public class GameScreen extends Screen {
+
+	private static final Font PHRASE_FONT = new Font(Game.FONT_NAME, Font.PLAIN, 32);
 
 	public GameScreen() {
 		setBackgroundColor(new Color(178, 238, 255));
@@ -25,8 +29,7 @@ public class GameScreen extends Screen {
 				char charAt = phrase.charAt(i);
 				if (charAt == ' ') {
 					lastSpaceIndex = i;
-				}
-				else if (Game.getLogic().isLetter(charAt) && !Game.getLogic().isLetterGuessed(charAt)) {
+				} else if (Game.getLogic().isLetter(charAt) && !Game.getLogic().isLetterGuessed(charAt)) {
 					phrase.setCharAt(i, '_');
 				}
 				if (i - startLineIndex < 80) {
@@ -36,7 +39,18 @@ public class GameScreen extends Screen {
 					}
 				}
 			}
-			addLabel(2, 30, phrase.toString(), Color.BLUE);
+			addLabel(2, 30, phrase.toString(), Color.BLUE).setFont(PHRASE_FONT);
+		}
+		addLabel(2, height - 2, "Type a letter to guess it").setVAlignment(Label.TEXT_ALIGN_BOTTOM);
+	}
+
+	@Override
+	public void updateTick() {
+		super.updateTick();
+		for (char c = 'A'; c <= 'Z'; c++) {
+			if (Keyboard.isKeyPressed("letter" + c)) {
+				
+			}
 		}
 	}
 
