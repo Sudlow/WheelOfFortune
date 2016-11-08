@@ -82,6 +82,7 @@ public class SpinnerScreen extends Screen {
 			Game.openScreen(new GameScreen());
 		} else if ("nextContinueTurn".equals(buttonId)) {
 			Game.getLogic().setGuessingPhrase(true);
+			Game.getLogic().setNeedsSpin(false);
 			Game.openScreen(new GameScreen());
 		}
 	}

@@ -38,7 +38,7 @@ public class Keyboard extends KeyAdapter {
 
 	public static void registerKeyBindings() {
 		for (int i = 0; i < 26; i++) {
-			bindKey(KeyEvent.VK_A + i, "letter" + ('A' + i));
+			bindKey(KeyEvent.VK_A + i, "letter" + ('A' + (char) i));
 		}
 	}
 

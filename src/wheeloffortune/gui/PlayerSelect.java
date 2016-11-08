@@ -29,7 +29,7 @@ public class PlayerSelect extends Screen {
 		if (buttonId.endsWith("PlayerButton")) {
 			int numPlayers = buttonId.charAt(0) - '0';
 			Game.getLogic().newGame(numPlayers);
-			Game.openScreen(new SpinnerScreen());
+			Game.openScreen(new GameScreen());
 		}
 	}
 

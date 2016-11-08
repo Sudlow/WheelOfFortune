@@ -5,7 +5,6 @@ import java.awt.Font;
 
 import wheeloffortune.engine.gui.Label;
 import wheeloffortune.engine.gui.Screen;
-import wheeloffortune.engine.input.Keyboard;
 import wheeloffortune.game.Game;
 
 public class GameScreen extends Screen {
@@ -19,8 +18,11 @@ public class GameScreen extends Screen {
 	@Override
 	public void layout() {
 		addLabel(2, 2, "Current player: " + (Game.getLogic().getCurrentPlayer().getIndex() + 1), Color.RED);
-		addLabel(width - 2, 2, "Money on spinner: S" + Game.getLogic().getMoneyOnSpinner(), Color.RED)
-				.setHAlignment(Label.TEXT_ALIGN_RIGHT);
+		addLabel(2, 25, "Money: S" + Game.getLogic().getCurrentPlayer().getMoney());
+		if (Game.getLogic().getMoneyOnSpinner() != -1) {
+			addLabel(width - 2, 2, "Money on spinner: S" + Game.getLogic().getMoneyOnSpinner(), Color.RED)
+					.setHAlignment(Label.TEXT_ALIGN_RIGHT);
+		}
 		if (Game.getLogic().isGuessingPhrase()) {
 			StringBuilder phrase = new StringBuilder(Game.getLogic().getCurrentPhrase());
 			int lastSpaceIndex = -1;
@@ -39,18 +41,53 @@ public class GameScreen extends Screen {
 					}
 				}
 			}
-			addLabel(2, 30, phrase.toString(), Color.BLUE).setFont(PHRASE_FONT);
+			addLabel(2, 50, phrase.toString(), Color.BLUE).setFont(PHRASE_FONT);
+			if (!Game.getLogic().needsSpin()) {
+				for (int i = 0; i < 13; i++) {
+					addButton(width * i / 13, height - height / 5, width / 13, height / 10,
+							String.valueOf((char) ('A' + i)), "button" + ((char) ('A' + i)));
+					addButton(width * i / 13, height - height / 10, width / 13, height / 10,
+							String.valueOf((char) ('N' + i)), "button" + ((char) ('N' + i)));
+				}
+			}
 		}
-		addLabel(2, height - 2, "Type a letter to guess it").setVAlignment(Label.TEXT_ALIGN_BOTTOM);
+		if (Game.getLogic().needsSpin()) {
+			addButton(width / 2 - 300 / 2, height / 2, 300, 100, "SPIN", "spinSpinner");
+		}
 	}
 
 	@Override
-	public void updateTick() {
-		super.updateTick();
-		for (char c = 'A'; c <= 'Z'; c++) {
-			if (Keyboard.isKeyPressed("letter" + c)) {
-				
+	public void onButtonPressed(String buttonId) {
+		if ("spinSpinner".equals(buttonId)) {
+			Game.openScreen(new SpinnerScreen());
+		} else if (buttonId.startsWith("button")) {
+			if (!Game.getLogic().isGuessingPhrase()) {
+				return;
 			}
+			if (Game.getLogic().needsSpin()) {
+				return;
+			}
+			char c = buttonId.charAt(6);
+			if (Game.getLogic().isLetterGuessed(c)) {
+				return;
+			}
+			int timesLetterAppeared = Game.getLogic().guessLetter(c);
+			Game.getLogic().getCurrentPlayer().setMoney(Game.getLogic().getCurrentPlayer().getMoney()
+					+ Game.getLogic().getMoneyOnSpinner() * timesLetterAppeared);
+			System.out.println("Letter " + c + " appears " + timesLetterAppeared + " times");
+			Game.getLogic().setNeedsSpin(true);
+			if (timesLetterAppeared == 0) {
+				// We failed :(
+				Game.getLogic().nextPlayer();
+				Game.getLogic().setGuessingPhrase(false);
+			} else {
+				if (Game.getLogic().hasGuessedPhrase()) {
+					Game.getLogic().getCurrentPlayer()
+							.setMoney((int) (Game.getLogic().getCurrentPlayer().getMoney() * 1.1f));
+					System.out.println("You guessed the phrase, adding 10% to your money");
+				}
+			}
+			Game.openScreen(new GameScreen());
 		}
 	}
 
