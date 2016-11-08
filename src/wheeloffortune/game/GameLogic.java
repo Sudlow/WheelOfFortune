@@ -77,7 +77,7 @@ public class GameLogic {
 		Arrays.fill(guessedLetters, false);
 		players = new Player[numberOfPlayers];
 		for (int i = 0; i < numberOfPlayers; i++) {
-			players[i] = new Player();
+			players[i] = new Player(i);
 		}
 		currentPlayerTurn = 0;
 		currentSpinnerAngle = 0;
