@@ -44,10 +44,13 @@ public class GameScreen extends Screen {
 			addLabel(2, 50, phrase.toString(), Color.BLUE).setFont(PHRASE_FONT);
 			if (!Game.getLogic().needsSpin()) {
 				for (int i = 0; i < 13; i++) {
-					addButton(width * i / 13, height - height / 5, width / 13, height / 10,
-							String.valueOf((char) ('A' + i)), "button" + ((char) ('A' + i)));
-					addButton(width * i / 13, height - height / 10, width / 13, height / 10,
-							String.valueOf((char) ('N' + i)), "button" + ((char) ('N' + i)));
+					for (int j = 0; j < 2; j++) {
+						char letter = (char) ('A' + j * 13 + i);
+						if (!Game.getLogic().isLetterGuessed(letter)) {
+							addButton(width * i / 13, height - height / 5 + height * j / 10, width / 13, height / 10,
+									String.valueOf(letter), "button" + letter);
+						}
+					}
 				}
 			}
 		}
@@ -59,6 +62,9 @@ public class GameScreen extends Screen {
 	@Override
 	public void onButtonPressed(String buttonId) {
 		if ("spinSpinner".equals(buttonId)) {
+			if (Game.getLogic().hasGuessedPhrase()) {
+				Game.getLogic().chooseNewPhrase();
+			}
 			Game.openScreen(new SpinnerScreen());
 		} else if (buttonId.startsWith("button")) {
 			if (!Game.getLogic().isGuessingPhrase()) {
