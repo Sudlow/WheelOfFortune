@@ -25,7 +25,7 @@ public interface SpinnerAction {
 		
 		@Override
 		public String toString() {
-			return "$" + amt;
+			return "S" + amt;
 		}
 
 	}
