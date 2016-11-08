@@ -191,9 +191,9 @@ public class SpinnerScreen extends Screen {
 
 			private int gestureStartTime;
 			private float lastGestureAngle;
-			private float degreesSpun = 0;
+			private float degreesSpun;
 			// -1 for counterclockwise, 1 for clockwise, 0 for unknown
-			private int spinDirection = 0;
+			private int spinDirection;
 
 			@Override
 			public void updateState(SpinnerScreen screen) {
@@ -204,6 +204,9 @@ public class SpinnerScreen extends Screen {
 				if (Mouse.isButtonReleased(MouseEvent.BUTTON1) || !screen.isMouseOnSpinner(currentGesturePoint)) {
 					// The wheel has been released
 					float spinSpeed = degreesSpun / (screen.time - gestureStartTime);
+					System.out.println(
+							"The mouse was dragged " + degreesSpun + " degrees over " + (screen.time - gestureStartTime)
+									+ " ticks. Spinning at " + spinSpeed + " degrees per tick");
 					screen.wheelSpinSpeed = spinSpeed;
 					if (Math.abs(spinSpeed) < MIN_SPIN_SPEED) {
 						screen.changeState(SHOW_NOT_PROPER_SPIN);
@@ -237,7 +240,8 @@ public class SpinnerScreen extends Screen {
 						spinDirection = spinDir;
 					}
 					if (spinDirection == 0) {
-						// The wheel isn't moving yet, this doesn't count to the speed of the spin
+						// The wheel isn't moving yet, this doesn't count to the
+						// speed of the spin
 						gestureStartTime = screen.time;
 					}
 				}
@@ -253,6 +257,8 @@ public class SpinnerScreen extends Screen {
 			public void initialize(SpinnerScreen screen) {
 				gestureStartTime = screen.time;
 				lastGestureAngle = screen.getAngleFromSpinner(Mouse.getMouseLocation());
+				degreesSpun = 0;
+				spinDirection = 0;
 			}
 
 			@Override
@@ -352,7 +358,8 @@ public class SpinnerScreen extends Screen {
 
 			@Override
 			public void layout(SpinnerScreen screen) {
-				spinProperlyLabel = screen.addLabel(screen.width / 2, screen.height / 2, "Spin properly you stupid idiot!", Color.RED);
+				spinProperlyLabel = screen.addLabel(screen.width / 2, screen.height / 2,
+						"Spin properly you stupid idiot!", Color.RED);
 				spinProperlyLabel.setHAlignment(Label.TEXT_ALIGN_CENTER);
 				spinProperlyLabel.setVAlignment(Label.TEXT_ALIGN_MIDDLE);
 				spinProperlyLabel.setFont(FONT);
