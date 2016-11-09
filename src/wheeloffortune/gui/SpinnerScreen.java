@@ -9,6 +9,7 @@ import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
 import wheeloffortune.engine.gui.Button;
 import wheeloffortune.engine.gui.Component;
@@ -206,7 +207,8 @@ public class SpinnerScreen extends Screen {
 					float spinSpeed = degreesSpun / (screen.time - gestureStartTime);
 					System.out.println(
 							"The mouse was dragged " + degreesSpun + " degrees over " + (screen.time - gestureStartTime)
-									+ " ticks. Spinning at " + spinSpeed + " degrees per tick");
+									+ " ticks. Spinning at " + spinSpeed + " degrees per tick (plus randomness)");
+					spinSpeed *= new Random().nextGaussian() * 0.1 + 1;
 					screen.wheelSpinSpeed = spinSpeed;
 					if (Math.abs(spinSpeed) < MIN_SPIN_SPEED) {
 						screen.changeState(SHOW_NOT_PROPER_SPIN);
